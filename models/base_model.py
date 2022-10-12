@@ -49,21 +49,12 @@ class BaseModel:
         self.updated_at = datetime.now()
         models.storage.save()
 
-    def __repr__(self):
-        """
-        returns string representation
-        """
-        return (self.__str__())
-
     def to_dict(self):
         """
         Return dict with string formats of time & add class info to dict
         """
-        dic = {}
-        dic["__class__"] = self.__class__.__name__
-        for k, v in self.__dict__.items():
-            if isinstance(v, (datetime, )):
-                dic[k] = v.isoformat()
-            else:
-                dic[k] = v
-        return dic
+        new_dict = dict(self.__dict__)
+        new_dict['created_at'] = self.__dict__['created_at'].isoformat()
+        new_dict['updated_at'] = self.__dict__['updated_at'].isoformat()
+        new_dict['__class__'] = self.__class__.__name__
+        return new_dict
