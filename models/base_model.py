@@ -3,7 +3,6 @@
 module "base_model"
 """
 
-from multiprocessing.sharedctypes import Value
 from uuid import uuid4
 from datetime import datetime
 import models
@@ -18,21 +17,18 @@ class BaseModel:
         """
         Initialize attributes
         """
-
-        if len(kwargs) != 0:
-            del kwargs["__class__"]
-
+        if kwargs:
             for key, val in kwargs.items():
                 if 'created_at' == key:
                     self.__dict__ = datetime.strptime(kwargs['created_at'],
-                                                    value, "%Y-%m-%dT%H:%M:%S.%f")
-                elif key =='updated_at':
+                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                elif 'updated_at' == key:
                     self.__dict__ = datetime.strptime(kwargs['updated_at'],
-                                                    value, "%Y-%m-%dT%H:%M:%S.%f")
-                elif key == "__class__":
+                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                elif "__class__" == key:
                     pass
                 else:
-                    self.__dict__[key] = Value
+                    setattr(self, key, val)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -58,7 +54,7 @@ class BaseModel:
         Return dict with string formats of time & add class info to dict
         """
         new_dict = self.__dict__.copy()
-        new_dict['__class__'] = type(self).__name__
         new_dict['created_at'] = self.__dict__['created_at'].isoformat()
         new_dict['updated_at'] = self.__dict__['updated_at'].isoformat()
+        new_dict['__class__'] = type(self).__name__
         return new_dict
