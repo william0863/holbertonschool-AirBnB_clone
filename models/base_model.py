@@ -3,6 +3,7 @@
 module "base_model"
 """
 
+from multiprocessing.sharedctypes import Value
 from uuid import uuid4
 from datetime import datetime
 import models
@@ -20,7 +21,7 @@ class BaseModel:
 
         if len(kwargs) != 0:
             del kwargs["__class__"]
-            
+
             for key, val in kwargs.items():
                 if 'created_at' == key:
                     self.created_at = datetime.strptime(kwargs['created_at'],
@@ -31,7 +32,7 @@ class BaseModel:
                 elif key == "__class__":
                     pass
                 else:
-                    setattr(self, key, val)
+                    self.__dict__[key] = Value
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
