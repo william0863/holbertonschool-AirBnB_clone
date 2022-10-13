@@ -22,10 +22,10 @@ class BaseModel:
                 if 'created_at' == key:
                     self.created_at = datetime.strptime(kwargs['created_at'],
                                                         "%Y-%m-%dT%H:%M:%S.%f")
-                elif 'updated_at' == key:
+                elif key =='updated_at':
                     self.updated_at = datetime.strptime(kwargs['updated_at'],
                                                         "%Y-%m-%dT%H:%M:%S.%f")
-                elif "__class__" == key:
+                elif key == "__class__":
                     pass
                 else:
                     setattr(self, key, val)
@@ -54,7 +54,7 @@ class BaseModel:
         Return dict with string formats of time & add class info to dict
         """
         new_dict = self.__dict__.copy()
+        new_dict['__class__'] = type(self).__name__
         new_dict['created_at'] = self.__dict__['created_at'].isoformat()
         new_dict['updated_at'] = self.__dict__['updated_at'].isoformat()
-        new_dict['__class__'] = type(self).__name__
         return new_dict
