@@ -17,7 +17,10 @@ class BaseModel:
         """
         Initialize attributes
         """
-        if kwargs:
+
+        if len(kwargs) != 0:
+            del kwargs["__class__"]
+            
             for key, val in kwargs.items():
                 if 'created_at' == key:
                     self.created_at = datetime.strptime(kwargs['created_at'],
