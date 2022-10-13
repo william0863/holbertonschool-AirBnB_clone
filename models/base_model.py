@@ -24,10 +24,10 @@ class BaseModel:
 
             for key, val in kwargs.items():
                 if 'created_at' == key:
-                    self.created_at = datetime.strptime(kwargs['created_at'],
+                    self.__dict__ = datetime.strptime(kwargs['created_at'],
                                                     value, "%Y-%m-%dT%H:%M:%S.%f")
                 elif key =='updated_at':
-                    self.updated_at = datetime.strptime(kwargs['updated_at'],
+                    self.__dict__ = datetime.strptime(kwargs['updated_at'],
                                                     value, "%Y-%m-%dT%H:%M:%S.%f")
                 elif key == "__class__":
                     pass
