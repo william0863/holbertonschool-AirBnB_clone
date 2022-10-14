@@ -110,5 +110,5 @@ $
 
 
 ### Authors
-Murdo Nicolai <@gmail.com>
-William Granger <granger.w35@gmail.com>
+Murdo Nicolai
+William Granger
