@@ -5,7 +5,7 @@ from models import base_model
 from models.base_model import BaseModel
 import json
 from datetime import datetime
-
+import os
 
 class FileStorage:
     """Represents the class FileStorage"""
@@ -32,14 +32,15 @@ class FileStorage:
             my_dict[key] = obj
             else:'''
             new_dict[key] = obj.to_dict()
-        with open(FileStorage.__file_path, 'a') as f:
+        with open(FileStorage.__file_path, 'w') as f:
             json.dump(new_dict, f)
 
     def reload(self):
         """Deserializes the JSON file to __objects"""
         try:
             with open(FileStorage.__file_path, 'r') as f:
-                new_obj = json.load(f)
+                a = f.read()
+                new_obj = json.loads(a)
             for key, val in new_obj.items():
                 if type(val) is dict:
                     FileStorage.__objects[key] = eval(val['__class__'])(**val)
