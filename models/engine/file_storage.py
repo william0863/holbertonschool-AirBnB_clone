@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """The class FileStorage"""
 
+from models import base_model
 from models.base_model import BaseModel
 import json
 from datetime import datetime
@@ -37,10 +38,10 @@ class FileStorage:
     def reload(self):
         """Deserializes the JSON file to __objects"""
         try:
-           with open(FileStorage.__file_path, 'r') as f:
+            with open(FileStorage.__file_path, 'r') as f:
                 new_obj = json.load(f)
-           for key, val in new_obj.items():
-                obj = FileStorage.class_dict[val['__class__']](**val)
-                FileStorage.__objects[key] = obj
+            for key, val in new_obj.items():
+                if type(val) is dict:
+                    FileStorage.__objects[key] = eval(val['__class__'])(**val)
         except FileNotFoundError:
             pass
