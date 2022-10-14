@@ -110,5 +110,5 @@ $
 
 
 ### Authors
-Murdo Nicolai
+Murdo Nicolai &
 William Granger
