@@ -7,7 +7,8 @@ contains the entry point of the command interpreter:
 """
 
 import cmd
-from models import base_model
+from models.base_model import BaseModel
+from models.user import User
 from models.engine.file_storage import FileStorage
 
 class HBNBCommand(cmd.Cmd):
@@ -34,7 +35,7 @@ class HBNBCommand(cmd.Cmd):
         elif (arg not in self.models):
             print ("** class doesn't exist **")
         else:
-            new = eval("base_model." + arg)()
+            new = eval(arg)()
             new.save()
             print (new.id)
 
