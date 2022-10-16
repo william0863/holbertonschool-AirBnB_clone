@@ -7,7 +7,7 @@ contains the City class
 
 from models.base_model import BaseModel
 
-class city(BaseModel):
+class City(BaseModel):
     """
 
     city has the following attributes:
@@ -15,7 +15,7 @@ class city(BaseModel):
         state_id: the id of the affiliated state
 
     """
-    
+
     name = ""
     state_id = ""
 
