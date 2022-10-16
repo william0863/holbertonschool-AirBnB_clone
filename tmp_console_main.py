@@ -67,6 +67,7 @@ class HBNBCommand(cmd.Cmd):
             try:
                 dict = FileStorage.all(self)
                 FileStorage.destroy(self, dict[key])
+                FileStorage.save(self)
             except KeyError:
                 print("** no instance found **")
 
