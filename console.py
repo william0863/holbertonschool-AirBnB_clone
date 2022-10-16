@@ -84,15 +84,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, *args):
         cmd = args[0].split()
-        if (cmd[0] == ''):
+        if (len(cmd) <= 0 or cmd[0] == ''):
             print ("** class name missing **")
         elif (cmd[0] not in self.models):
             print (f"** class doesn't exist **")
-        elif (cmd[1] == ''):
+        elif (len(cmd) <= 1 or cmd[1] == ''):
             print ("** instance id missing **")
         elif (len(cmd) <= 2 or cmd[2] == ''):
             print ("** attribute name missing **")
-        elif (cmd[3] == ''):
+        elif (len(cmd) <= 3 or cmd[3] == ''):
             print ("** value missing **")
         else:
             key = cmd[0] + "." + cmd[1]
@@ -106,4 +106,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
