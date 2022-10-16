@@ -21,7 +21,7 @@ class BaseModel:
         if kwargs:
             for key, val in kwargs.items():
                 if 'created_at' == key:
-                    self.created_at= datetime.strptime(kwargs['created_at'],
+                    self.created_at = datetime.strptime(kwargs['created_at'],
                                                         "%Y-%m-%dT%H:%M:%S.%f")
                 elif 'updated_at' == key:
                     self.updated_at = datetime.strptime(kwargs['updated_at'],
@@ -59,4 +59,3 @@ class BaseModel:
         new_dict['updated_at'] = self.__dict__['updated_at'].isoformat()
         new_dict['__class__'] = type(self).__name__
         return new_dict
-

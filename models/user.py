@@ -7,6 +7,7 @@ contains the user class
 
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """ User has the following attributes:
     email (string): the email of the user
