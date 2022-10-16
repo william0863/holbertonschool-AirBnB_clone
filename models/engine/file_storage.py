@@ -46,3 +46,9 @@ class FileStorage:
                     FileStorage.__objects[key] = eval(val['__class__'])(**val)
         except FileNotFoundError:
             pass
+
+    def destroy(self, obj):
+        """deletes an object forme a save"""
+        if obj:
+            key = f'{obj.__class__.__name__}.{obj.id}'
+            del FileStorage.__objects[key]
