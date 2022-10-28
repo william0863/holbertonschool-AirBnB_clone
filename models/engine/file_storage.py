@@ -40,22 +40,3 @@ class FileStorage:
             else:'''
             new_dict[key] = obj.to_dict()
         with open(FileStorage.__file_path, 'w') as f:
-            json.dump(new_dict, f)
-
-    def reload(self):
-        """Deserializes the JSON file to __objects"""
-        try:
-            with open(FileStorage.__file_path, 'r') as f:
-                a = f.read()
-                new_obj = json.loads(a)
-            for key, val in new_obj.items():
-                if type(val) is dict:
-                    FileStorage.__objects[key] = eval(val['__class__'])(**val)
-        except FileNotFoundError:
-            pass
-
-    def destroy(self, obj):
-        """deletes an object forme a save"""
-        if obj:
-            key = f'{obj.__class__.__name__}.{obj.id}'
-            del FileStorage.__objects[key]
